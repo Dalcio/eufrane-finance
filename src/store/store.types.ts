@@ -2,6 +2,7 @@ import {StateCreator} from 'zustand';
 
 export type StoreState = {
   theme: 'dark' | 'light';
+  user: User | undefined;
 };
 
 export type StoreActions = {

@@ -6,6 +6,7 @@ import storeActions from './store.actions';
 
 const storeState: StoreState = {
   theme: 'dark',
+  user: undefined,
 };
 
 let store = combine<StoreState, StoreActions, any, any>(
