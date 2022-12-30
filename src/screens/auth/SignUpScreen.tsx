@@ -1,6 +1,5 @@
-import {Pressable, StyleSheet} from 'react-native';
-import {Text, View} from 'components/Themed';
-import {AuthScreenProps} from 'navigation/types'
+import {AuthScreenProps} from 'navigation/types';
+import {Box, Button, Text} from 'components';
 
 export function SignUpScreen({navigation}: AuthScreenProps<'SignUp'>) {
   const goToSignInScreen = () => {
@@ -8,24 +7,10 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUp'>) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Sign Up Page</Text>
+    <Box>
+      <Text variant="header">Sign Up Page</Text>
 
-      <Pressable onPress={goToSignInScreen}>
-        <Text style={styles.title}>Go to Sign In Screen</Text>
-      </Pressable>
-    </View>
+      <Button onPress={goToSignInScreen} label="Go to Sign In Screen" />
+    </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});

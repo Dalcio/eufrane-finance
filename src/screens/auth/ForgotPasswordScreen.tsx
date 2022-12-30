@@ -1,6 +1,5 @@
-import {Pressable, StyleSheet} from 'react-native';
-import {Text, View} from 'components/Themed';
-import {AuthScreenProps} from 'navigation/types'
+import {AuthScreenProps} from 'navigation/types';
+import {Box, Button, Text} from 'components';
 
 export function ForgotPasswordScreen({
   navigation,
@@ -10,23 +9,10 @@ export function ForgotPasswordScreen({
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Forgot Password Page</Text>
-      <Pressable onPress={goToSignInScreen}>
-        <Text style={styles.title}>Go to Sign In Screen</Text>
-      </Pressable>
-    </View>
+    <Box>
+      <Text variant="header">Forgot Password Page</Text>
+
+      <Button onPress={goToSignInScreen} label="Go to Sign In Screen" />
+    </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});

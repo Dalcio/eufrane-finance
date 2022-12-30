@@ -1,12 +1,12 @@
 import {StyleSheet} from 'react-native';
-import {Text, View} from 'components/Themed';
+import {Box, Text} from 'components';
 import {SignedScreensProps} from 'navigation/types';
 
 export function HomeScreen({navigation}: SignedScreensProps<'Home'>) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Home Screen</Text>
-    </View>
+    <Box >
+      <Text>Home Screen</Text>
+    </Box>
   );
 }
 

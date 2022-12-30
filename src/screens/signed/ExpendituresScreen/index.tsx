@@ -1,14 +1,14 @@
 import {StyleSheet} from 'react-native';
-import {Text, View} from 'components/Themed';
+import {Box, Text} from 'components';
 import {SignedScreensProps} from 'navigation/types';
 
 export function ExpendituresScreen({
   navigation,
 }: SignedScreensProps<'Expenditures'>) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Saidas (Gastos) Screen</Text>
-    </View>
+    <Box >
+      <Text>Saidas (Gastos) Screen</Text>
+    </Box>
   );
 }
 

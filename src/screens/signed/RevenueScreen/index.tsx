@@ -1,12 +1,12 @@
 import {StyleSheet} from 'react-native';
-import {Text, View} from 'components/Themed';
+import {Box, Text} from 'components';
 import {SignedScreensProps} from 'navigation/types';
 
 export function RevenueScreen({navigation}: SignedScreensProps<'Revenue'>) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Revenue Screen</Text>
-    </View>
+    <Box >
+      <Text>Revenue Screen</Text>
+    </Box>
   );
 }
 
