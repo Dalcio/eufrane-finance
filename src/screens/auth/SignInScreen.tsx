@@ -1,6 +1,13 @@
 import {Pressable} from 'react-native';
 import {AuthScreenProps} from 'navigation/types';
-import {Button, Box, Text, ScreenContainer} from 'components';
+import {
+  Button,
+  Box,
+  Text,
+  ScreenContainer,
+  Input,
+  PasswordInput,
+} from 'components';
 
 export function SignInScreen({navigation}: AuthScreenProps<'SignIn'>) {
   const goToSignUpScreen = () => {
@@ -14,6 +21,9 @@ export function SignInScreen({navigation}: AuthScreenProps<'SignIn'>) {
   return (
     <ScreenContainer alignItems="center" justifyContent="center">
       <Text variant="header">Sign In Page</Text>
+
+      <Input label="Email" />
+      <PasswordInput label="Palavra passe" placeholder="Seenha" />
 
       <Pressable onPress={goToSignUpScreen}>
         <Text variant="subheader">Go to Sign In Screen</Text>

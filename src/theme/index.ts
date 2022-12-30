@@ -16,6 +16,8 @@ const theme = createTheme({
     l: 24,
   },
   colors: {
+    white: palette.white,
+    black: palette.black,
     background: palette.purple,
     onBackground: palette.white,
     primaryText: palette.black,
