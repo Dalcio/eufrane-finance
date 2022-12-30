@@ -1,4 +1,4 @@
-import {FontAwesome} from '@expo/vector-icons';
+import {AntDesign, FontAwesome, MaterialIcons} from '@expo/vector-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import useColorScheme from 'hooks/useColorScheme';
 import {Pressable} from 'react-native';
@@ -29,7 +29,8 @@ export default function SignedNavigator() {
         component={HomeScreen}
         options={({navigation}: SignedScreensProps<'Home'>) => ({
           title: 'Home',
-          tabBarIcon: ({color}) => <TabBarIcon name="code" color={color} />,
+          headerShown: true,
+          tabBarIcon: ({color}) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -39,7 +40,7 @@ export default function SignedNavigator() {
             >
               <FontAwesome
                 name="info-circle"
-                size={25}
+                size={24}
                 color={Colors[colorScheme].text}
                 style={{marginRight: 15}}
               />
@@ -52,15 +53,9 @@ export default function SignedNavigator() {
         component={RevenueScreen}
         options={{
           title: 'Receitas',
-          tabBarIcon: ({color}) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Budget"
-        component={BudgetScreen}
-        options={{
-          title: 'Orçamento',
-          tabBarIcon: ({color}) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({color}) => (
+            <MaterialIcons name="attach-money" size={24} color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
@@ -68,7 +63,19 @@ export default function SignedNavigator() {
         component={ExpendituresScreen}
         options={{
           title: 'Gastos',
-          tabBarIcon: ({color}) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({color}) => (
+            <MaterialIcons name="money-off" size={24} color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Budget"
+        component={BudgetScreen}
+        options={{
+          title: 'Orçamento',
+          tabBarIcon: ({color}) => (
+            <AntDesign name="linechart" size={24} color={color} />
+          ),
         }}
       />
     </BottomTab.Navigator>
