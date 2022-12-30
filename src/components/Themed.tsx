@@ -18,6 +18,7 @@ export const ScreenContainer = ({
 }: BoxProps<Theme> & {children: ReactElement[] | ReactElement}) => (
   <Box
     p="m"
+    bg="white"
     style={{paddingTop: StatusBar.currentHeight, height: '100%'}}
     {...props}
   >
