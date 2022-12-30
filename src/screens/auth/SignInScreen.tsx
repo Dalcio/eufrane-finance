@@ -1,6 +1,6 @@
 import {Pressable} from 'react-native';
 import {AuthScreenProps} from 'navigation/types';
-import {Button, Box, Text} from 'components';
+import {Button, Box, Text, ScreenContainer} from 'components';
 
 export function SignInScreen({navigation}: AuthScreenProps<'SignIn'>) {
   const goToSignUpScreen = () => {
@@ -12,7 +12,7 @@ export function SignInScreen({navigation}: AuthScreenProps<'SignIn'>) {
   };
 
   return (
-    <Box alignItems="center">
+    <ScreenContainer alignItems="center" justifyContent="center">
       <Text variant="header">Sign In Page</Text>
 
       <Pressable onPress={goToSignUpScreen}>
@@ -24,6 +24,6 @@ export function SignInScreen({navigation}: AuthScreenProps<'SignIn'>) {
       </Pressable>
 
       <Button label="Entrar" onPress={() => {}} />
-    </Box>
+    </ScreenContainer>
   );
 }
