@@ -9,11 +9,13 @@ type InputProps = {
   label?: string;
   boxProps?: BoxProps;
   inputContainer?: BoxProps;
+  error?: string;
 } & TextInputProps;
 
 export const Input = ({
   label,
   boxProps,
+  error,
   inputContainer,
   ...props
 }: InputProps) => {
@@ -29,7 +31,7 @@ export const Input = ({
         borderStyle="solid"
         borderRadius="s"
         borderWidth={1}
-        borderColor="black"
+        borderColor={(error && 'error') || 'black'}
         minWidth="100%"
         minHeight={56}
         flexDirection="row"
@@ -42,6 +44,16 @@ export const Input = ({
           {...props}
         />
       </Box>
+      {error && (
+        <Text
+          variant="buttonLabel"
+          mt="s"
+          color="error"
+          textTransform="uppercase"
+        >
+          {error}
+        </Text>
+      )}
     </Box>
   );
 };
@@ -49,6 +61,7 @@ export const Input = ({
 export const PasswordInput = ({
   label,
   boxProps,
+  error,
   inputContainer,
   ...props
 }: InputProps) => {
@@ -66,7 +79,7 @@ export const PasswordInput = ({
         borderStyle="solid"
         borderRadius="s"
         borderWidth={1}
-        borderColor="black"
+        borderColor={(error && 'error') || 'black'}
         minWidth="100%"
         minHeight={56}
         flexDirection="row"
@@ -96,6 +109,16 @@ export const PasswordInput = ({
           />
         </Pressable>
       </Box>
+      {error && (
+        <Text
+          variant="buttonLabel"
+          mt="s"
+          color="error"
+          textTransform="uppercase"
+        >
+          {error}
+        </Text>
+      )}
     </Box>
   );
 };

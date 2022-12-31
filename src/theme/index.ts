@@ -2,10 +2,12 @@ import {createTheme} from '@shopify/restyle';
 
 export const palette = {
   purple: '#5A31F4',
+  blue: '#2200cc',
   white: '#FFF',
   black: '#111',
   darkGray: '#333',
-  lightGray: '#EEE',
+  lightGray: '#888',
+  red: '#dd0020',
 };
 
 const theme = createTheme({
@@ -18,6 +20,9 @@ const theme = createTheme({
   colors: {
     white: palette.white,
     black: palette.black,
+    blue: palette.blue,
+    error: palette.red,
+    lightGray: palette.lightGray,
     background: palette.purple,
     onBackground: palette.white,
     primaryText: palette.black,
