@@ -22,7 +22,7 @@ export function SignInScreen({navigation}: AuthScreenProps<'SignIn'>) {
     <ScreenContainer alignItems="center" justifyContent="center">
       <Text variant="header">Sign In Page</Text>
 
-      <Input label="Email" />
+      <Input label="Email" placeholder="ex.: alguem@exemplo.com" />
       <PasswordInput label="Palavra passe" placeholder="Seenha" />
 
       <Pressable onPress={goToSignUpScreen}>

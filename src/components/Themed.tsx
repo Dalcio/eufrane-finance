@@ -1,5 +1,5 @@
 import {
-  BoxProps,
+  BoxProps as DefaultBoxProps,
   VariantProps,
   createBox,
   createRestyleComponent,
@@ -11,11 +11,12 @@ import {StatusBar} from 'react-native';
 import {Theme} from 'theme';
 
 export const Box = createBox<Theme>();
+export type BoxProps = DefaultBoxProps<Theme>;
 
 export const ScreenContainer = ({
   children,
   ...props
-}: BoxProps<Theme> & {children: ReactElement[] | ReactElement}) => (
+}: BoxProps & {children: ReactElement[] | ReactElement}) => (
   <Box
     p="m"
     bg="white"
