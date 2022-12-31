@@ -1,5 +1,6 @@
-import {isLoading} from 'expo-font';
 import {useState, useReducer} from 'react';
+import {Alert} from 'react-native';
+import useStore from 'store';
 
 type SignUpErrors = {
   email?: string;
@@ -13,6 +14,8 @@ export const useSignUpScreenForm = () => {
   const [password, setPassword] = useState<string>('');
   const [errors, setErrors] = useState<SignUpErrors>({});
   const [isLoading, toggleIsLoading] = useReducer((loading) => !loading, false);
+
+  const signUp = useStore((s) => s.signUp);
 
   const onChangeName = (str: string) => {
     setName(str);
@@ -33,20 +36,22 @@ export const useSignUpScreenForm = () => {
   };
 
   const onSubmit = () => {
-    if (!email || !password || !name) {
-      let errs: SignUpErrors;
+    if (!name || !email || !password) {
+      let errs: SignUpErrors = {};
 
-      if (!name) errs = {...errors, name: 'Digite um nomeporfavor'};
+      if (!name) errs = {name: 'Digite um nomeporfavor'};
 
-      if (!email) errs = {...errors, email: 'Digite um email porfavor'};
+      if (!email) errs = {...errs, email: 'Digite um email porfavor'};
 
-      if (!password) errs = {...errors, password: 'Digite uma palavra passe'};
+      if (!password) errs = {...errs, password: 'Digite uma palavra passe'};
 
-      setErrors((ers) => ({...ers, ...errs}));
+      setErrors((ers) => ({...errs}));
 
       return;
+    } else {
+      toggleIsLoading();
+      signUp({name, email, password}, toggleIsLoading);
     }
-    toggleIsLoading();
   };
 
   return {

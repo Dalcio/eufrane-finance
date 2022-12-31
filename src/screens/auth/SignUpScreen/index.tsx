@@ -11,8 +11,14 @@ import {
 import {useSignUpScreenForm} from './form';
 
 export function SignUpScreen({navigation}: AuthScreenProps<'SignUp'>) {
-  const {errors, isLoading, onSubmit, onChangeEmail, onChangePassword} =
-    useSignUpScreenForm();
+  const {
+    errors,
+    isLoading,
+    onSubmit,
+    onChangeName,
+    onChangeEmail,
+    onChangePassword,
+  } = useSignUpScreenForm();
 
   const goToSignInScreen = () => {
     navigation.push('SignIn');
@@ -26,10 +32,8 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUp'>) {
       <Input
         label="Nome"
         placeholder="Fulano de Tal"
-        keyboardType="email-address"
-        textContentType="emailAddress"
-        onChangeText={onChangeEmail}
-        error={errors.email}
+        onChangeText={onChangeName}
+        error={errors.name}
       />
       <Input
         label="Email"
@@ -47,6 +51,7 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUp'>) {
       />
       <Button
         size="l"
+        mt="l"
         label="Criar Conta"
         onPress={onSubmit}
         isLoading={isLoading}

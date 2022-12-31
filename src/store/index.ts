@@ -1,5 +1,5 @@
-import {combine, devtools, persist} from 'zustand/middleware';
-import {StoreState, TheStore, StoreActions, Store} from './store.types';
+import {combine} from 'zustand/middleware';
+import {StoreState, StoreActions, Store} from './store.types';
 
 import create from 'zustand';
 import storeActions from './store.actions';
@@ -13,9 +13,6 @@ let store = combine<StoreState, StoreActions, any, any>(
   storeState,
   storeActions,
 );
-
-store = persist(store);
-store = devtools(store);
 
 const useStore = create<Store>(store);
 

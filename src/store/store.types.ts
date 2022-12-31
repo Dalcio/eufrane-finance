@@ -7,6 +7,8 @@ export type StoreState = {
 
 export type StoreActions = {
   toggleTheme: () => void;
+  signIn: (data: SignInParams, cb?: Callback) => void;
+  signUp: (data: SignUpParams, cb?: Callback) => void;
 };
 
 export type Store = StoreState & StoreActions;

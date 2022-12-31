@@ -21,11 +21,8 @@ export const Input = ({
 }: InputProps) => {
   return (
     <Box minWidth="100%" mt="m" {...boxProps}>
-      {label && (
-        <Text mb="m" textTransform="uppercase">
-          {label}
-        </Text>
-      )}
+      {(label && <Text mb="m" textTransform="uppercase" content={label} />) ||
+        null}
       <Box
         alignItems="center"
         borderStyle="solid"
@@ -44,16 +41,10 @@ export const Input = ({
           {...props}
         />
       </Box>
-      {error && (
-        <Text
-          variant="buttonLabel"
-          mt="s"
-          color="error"
-          textTransform="uppercase"
-        >
-          {error}
-        </Text>
-      )}
+      {(error && (
+        <Text variant="buttonLabel" mt="s" color="error" content={error} />
+      )) ||
+        null}
     </Box>
   );
 };
@@ -69,11 +60,8 @@ export const PasswordInput = ({
 
   return (
     <Box alignItems="flex-start" mt="m" {...boxProps}>
-      {label && (
-        <Text mb="m" textTransform="uppercase">
-          {label}
-        </Text>
-      )}
+      {(label && <Text mb="m" textTransform="uppercase" content={label} />) ||
+        null}
       <Box
         alignItems="center"
         borderStyle="solid"
@@ -109,16 +97,10 @@ export const PasswordInput = ({
           />
         </Pressable>
       </Box>
-      {error && (
-        <Text
-          variant="buttonLabel"
-          mt="s"
-          color="error"
-          textTransform="uppercase"
-        >
-          {error}
-        </Text>
-      )}
+      {(error && (
+        <Text variant="buttonLabel" mt="s" color="error" content={error} />
+      )) ||
+        null}
     </Box>
   );
 };

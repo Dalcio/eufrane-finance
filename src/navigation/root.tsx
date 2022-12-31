@@ -8,7 +8,7 @@ import useStore from 'store';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootNavigator() {
-  const {user} = useStore();
+  const user = useStore((s) => s.user);
 
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>

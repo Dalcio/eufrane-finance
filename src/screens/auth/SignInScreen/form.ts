@@ -11,7 +11,8 @@ export const useSignInScreenForm = () => {
   const [password, setPassword] = useState<string>('');
   const [errors, setErrors] = useState<SignInErrors>({});
   const [isLoading, toggleIsLoading] = useReducer((loading) => !loading, false);
-  const {} = useStore();
+
+  const signIn = useStore((s) => s.signIn);
 
   const onChangeEmail = (str: string) => {
     setEmail(str);
@@ -27,18 +28,19 @@ export const useSignInScreenForm = () => {
 
   const onSubmit = () => {
     if (!email || !password) {
-      let errs: SignInErrors;
+      let errs: SignInErrors = {};
 
-      if (!email) errs = {...errors, email: 'Digite um email porfavor'};
+      if (!email) errs = {email: 'Digite um email porfavor'};
 
-      if (!password) errs = {...errors, password: 'Digite uma palavra passe'};
+      if (!password) errs = {...errs, password: 'Digite uma palavra passe'};
 
-      setErrors((ers) => ({...ers, ...errs}));
+      setErrors({...errs});
 
       return;
+    } else {
+      toggleIsLoading();
+      signIn({email, password}, toggleIsLoading);
     }
-
-    toggleIsLoading();
   };
 
   return {
