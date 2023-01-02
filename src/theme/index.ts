@@ -3,6 +3,8 @@ import {createTheme} from '@shopify/restyle';
 export const palette = {
   purple: '#5A31F4',
   blue: '#2200cc',
+  blue100: '#432FBF',
+  blue200: '#5E4ECB',
   white: '#FFF',
   black: '#111',
   darkGray: '#333',
@@ -19,8 +21,13 @@ const theme = createTheme({
   },
   colors: {
     white: palette.white,
+    white10: '#F3F2FB',
+    white200: '#E7EAFF',
     black: palette.black,
     blue: palette.blue,
+    blue100: palette.blue100,
+    blue200: palette.blue200,
+
     error: palette.red,
     lightGray: palette.lightGray,
     background: palette.purple,

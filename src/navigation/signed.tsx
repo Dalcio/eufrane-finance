@@ -1,4 +1,4 @@
-import {AntDesign, FontAwesome, MaterialIcons} from '@expo/vector-icons';
+import {FontAwesome} from '@expo/vector-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import useColorScheme from 'hooks/useColorScheme';
 import {Pressable} from 'react-native';
@@ -10,6 +10,7 @@ import {
   HomeScreen,
   RevenueScreen,
 } from 'screens/signed';
+import {TabBarMenu} from './TabBarMenu';
 
 const BottomTab = createBottomTabNavigator<SignedParamList>();
 
@@ -19,10 +20,8 @@ export default function SignedNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-        headerShown: false,
-      }}
+      screenOptions={{headerShown: false}}
+      tabBar={(props) => <TabBarMenu {...props} />}
     >
       <BottomTab.Screen
         name="Home"
@@ -30,7 +29,6 @@ export default function SignedNavigator() {
         options={({navigation}: SignedScreensProps<'Home'>) => ({
           title: 'Home',
           headerShown: true,
-          tabBarIcon: ({color}) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -51,43 +49,18 @@ export default function SignedNavigator() {
       <BottomTab.Screen
         name="Revenue"
         component={RevenueScreen}
-        options={{
-          title: 'Receitas',
-          tabBarIcon: ({color}) => (
-            <MaterialIcons name="attach-money" size={24} color={color} />
-          ),
-        }}
+        options={{title: 'Receitas'}}
       />
       <BottomTab.Screen
         name="Expenditures"
         component={ExpendituresScreen}
-        options={{
-          title: 'Gastos',
-          tabBarIcon: ({color}) => (
-            <MaterialIcons name="money-off" size={24} color={color} />
-          ),
-        }}
+        options={{title: 'Gastos'}}
       />
       <BottomTab.Screen
         name="Budget"
         component={BudgetScreen}
-        options={{
-          title: 'Orçamento',
-          tabBarIcon: ({color}) => (
-            <AntDesign name="linechart" size={24} color={color} />
-          ),
-        }}
+        options={{title: 'Orçamento'}}
       />
     </BottomTab.Navigator>
   );
-}
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{marginBottom: -3}} {...props} />;
 }
