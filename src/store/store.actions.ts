@@ -1,6 +1,6 @@
 import {TheStore} from './store.types';
 
-const storeActions: TheStore = (set) => ({
+const storeActions: TheStore = (set, get) => ({
   toggleTheme: () => {
     set((state) => ({theme: state.theme === 'dark' ? 'light' : 'dark'}));
   },
@@ -27,6 +27,21 @@ const storeActions: TheStore = (set) => ({
       }));
       cb?.();
     }, 2 * 60);
+  },
+  // addDailyExpenditure(props) {},
+  addExpenditure(props) {
+    const expenditures = get().expenditures ?? [];
+
+    set(() => ({
+      expenditures: [...expenditures, props],
+    }));
+  },
+  addRevenue(props) {
+    const revenues = get().revenues ?? [];
+
+    set(() => ({
+      revenues: [...revenues, props],
+    }));
   },
 });
 

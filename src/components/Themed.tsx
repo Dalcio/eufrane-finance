@@ -18,7 +18,7 @@ export type BoxProps = DefaultBoxProps<Theme>;
 export const ScreenContainer = ({
   children,
   ...props
-}: BoxProps & {children: ReactElement[] | ReactElement}) => (
+}: BoxProps & {children: ReactElement[] | ReactElement | null}) => (
   <ScrollView>
     <Box
       p="m"

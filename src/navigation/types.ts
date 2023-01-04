@@ -4,6 +4,7 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {ReactNode} from 'react';
 
 declare global {
   namespace ReactNavigation {
@@ -14,7 +15,7 @@ declare global {
 export type RootStackParamList = {
   Auth: NavigatorScreenParams<AuthParamList> | undefined;
   Signed: NavigatorScreenParams<SignedParamList> | undefined;
-  Modal: undefined;
+  Modal: {view: keyof SignedParamList};
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
