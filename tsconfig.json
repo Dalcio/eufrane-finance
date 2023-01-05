@@ -51,6 +51,12 @@
       ],
       "theme/*": [
         "./src/theme/*"
+      ],
+      "services/*": [
+        "./src/services/*"
+      ],
+      "api/*": [
+        "./src/api/*"
       ]
     }
   }
