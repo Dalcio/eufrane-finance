@@ -27,6 +27,11 @@ const ROUTES: RoutesType = {
       <MaterialIcons name="money-off" size={30} color={color} />
     ),
   },
+  dailyexpenditures: {
+    Icon: ({color}: IconType) => (
+      <MaterialIcons name="money-off" size={30} color={color} />
+    ),
+  },
   budget: {
     Icon: ({color}: IconType) => (
       <AntDesign name="linechart" size={30} color={color} />

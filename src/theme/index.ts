@@ -52,6 +52,12 @@ const theme = createTheme({
       lineHeight: 36,
       color: 'primaryText',
     },
+    subheader2: {
+      fontWeight: '600',
+      fontSize: 20,
+      lineHeight: 30,
+      color: 'primaryText',
+    },
     defaults: {
       fontSize: 16,
       lineHeight: 24,

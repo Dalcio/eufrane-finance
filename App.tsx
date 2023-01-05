@@ -6,15 +6,18 @@ import useColorScheme from 'hooks/useColorScheme';
 import Navigation from 'navigation';
 import theme from 'theme';
 import {ThemeProvider} from '@shopify/restyle';
+import {layout} from 'constants/Layout';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
+  const {width} = layout.window;
+  const marginX = width <= 500 ? 0 : (width - 500) / 2;
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
+      <SafeAreaProvider style={{maxWidth: 500, marginHorizontal: marginX}}>
         <ThemeProvider theme={theme}>
           <Navigation />
           <StatusBar />

@@ -35,6 +35,7 @@ export type SignedParamList = {
   Revenue: undefined;
   Expenditures: undefined;
   Budget: undefined;
+  DailyExpenditures: undefined;
 };
 
 export type SignedScreensProps<Screen extends keyof SignedParamList> =

@@ -9,6 +9,10 @@ const storeState: StoreState = {
   user: undefined,
   expenditures: undefined,
   revenues: undefined,
+  isLoading: false,
+  dailyExpenditures: undefined,
+  balance: 0,
+  budget: 0,
 };
 
 let store = combine<StoreState, StoreActions, any, any>(

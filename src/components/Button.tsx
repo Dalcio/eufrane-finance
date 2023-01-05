@@ -49,7 +49,7 @@ export const Button = ({
   return (
     <BaseButton
       flexDirection="row"
-      borderRadius="s"
+      borderRadius="m"
       backgroundColor={isLoading || props.disabled ? 'lightGray' : bgColor}
       minWidth={100}
       width={(size && SIZES[size]) || undefined}

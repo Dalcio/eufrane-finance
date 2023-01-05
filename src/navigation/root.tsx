@@ -11,17 +11,28 @@ export function RootNavigator() {
   const user = useStore((s) => s.user);
 
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      {user ? (
-        <>
-          <Stack.Screen name="Signed" component={SignedNavigator} />
-          <Stack.Group screenOptions={{presentation: 'modal'}}>
-            <Stack.Screen name="Modal" component={ModalScreen} />
-          </Stack.Group>
-        </>
-      ) : (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        contentStyle: {
+          backgroundColor: 'white',
+        },
+      }}
+    >
+      {/* {user ? ( */}
+      <>
+        <Stack.Screen name="Signed" component={SignedNavigator} />
+        <Stack.Group>
+          <Stack.Screen
+            name="Modal"
+            component={ModalScreen}
+            options={{presentation: 'modal'}}
+          />
+        </Stack.Group>
+      </>
+      {/* ) : (
         <Stack.Screen name="Auth" component={AuthNavigator} />
-      )}
+      )} */}
     </Stack.Navigator>
   );
 }

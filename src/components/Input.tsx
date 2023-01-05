@@ -26,7 +26,7 @@ export const Input = ({
       <Box
         alignItems="center"
         borderStyle="solid"
-        borderRadius="s"
+        borderRadius="m"
         borderWidth={1}
         borderColor={(error && 'error') || 'black'}
         minWidth="100%"
@@ -59,13 +59,13 @@ export const PasswordInput = ({
   const [show, toggleShow] = useReducer((isShawn) => !isShawn, true);
 
   return (
-    <Box alignItems="flex-start" mt="m" {...boxProps}>
+    <Box alignItems="flex-start" mt="m" {...boxProps} width="100%">
       {(label && <Text mb="m" textTransform="uppercase" content={label} />) ||
         null}
       <Box
         alignItems="center"
         borderStyle="solid"
-        borderRadius="s"
+        borderRadius="m"
         borderWidth={1}
         borderColor={(error && 'error') || 'black'}
         minWidth="100%"

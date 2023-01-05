@@ -9,13 +9,19 @@ export function RevenueScreen({navigation}: SignedScreensProps<'Revenue'>) {
   const [value, setValue] = useState<string>('');
 
   const addRevenue = useStore((s) => s.addRevenue);
+  const isAddingRevenue = useStore((s) => s.isLoading);
+
+  const resetForm = () => {
+    setSource('');
+    setValue('');
+  };
 
   const seeRevenue = () => {
     navigation.navigate('Modal', {view: 'Revenue'});
   };
 
   const handleAddRevenue = () => {
-    addRevenue({source, value: Number(value), date: new Date()});
+    addRevenue({source, value: Number(value), date: new Date()}, resetForm);
   };
 
   return (
@@ -29,7 +35,7 @@ export function RevenueScreen({navigation}: SignedScreensProps<'Revenue'>) {
       <Box my="l">
         <MaterialIcons name="attach-money" size={100} />
       </Box>
-      <Box>
+      <Box width="100%">
         <Input
           label="Fonte da rececita"
           placeholder="Venda de carro"
@@ -47,7 +53,8 @@ export function RevenueScreen({navigation}: SignedScreensProps<'Revenue'>) {
         my="l"
         label="Adicionar Receita"
         onPress={handleAddRevenue}
-        disabled={!source?.length || !value?.length}
+        disabled={!source?.length || !value?.length || isAddingRevenue}
+        isLoading={isAddingRevenue}
       />
       <Button size="l" label="Histórico de receitas" onPress={seeRevenue} />
     </ScreenContainer>

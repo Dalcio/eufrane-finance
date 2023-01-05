@@ -4,24 +4,21 @@ import useStore from 'store';
 import {useState} from 'react';
 import {MaterialIcons} from '@expo/vector-icons';
 
-export function ExpendituresScreen({
+export function DailyExpenditureScreen({
   navigation,
 }: SignedScreensProps<'Expenditures'>) {
+  const [date, setDate] = useState<Date>(new Date());
   const [source, setSource] = useState<string>('');
   const [value, setValue] = useState<string>('');
 
-  const addExpenditure = useStore((s) => s.addExpenditure);
+  const addDailyExpenditure = useStore((s) => s.addDailyExpenditure);
 
-  const seeExpenditures = () => {
-    navigation.navigate('Modal', {view: 'Expenditures'});
+  const seeDailyExpenditures = () => {
+    navigation.navigate('Modal', {view: 'DailyExpenditures'});
   };
 
-  const goToDailyExpenditures = () => {
-    navigation.navigate('DailyExpenditures');
-  };
-
-  const handleAddExpenditures = () => {
-    addExpenditure({source, value: Number(value), date: new Date()});
+  const handleAddDailyExpenditures = () => {
+    addDailyExpenditure({source, value: Number(value), date});
   };
 
   return (
@@ -29,44 +26,45 @@ export function ExpendituresScreen({
       <Text
         variant="subheader"
         textTransform="uppercase"
-        content="Saidas (Gastos)"
+        content="Gastos Diários"
       />
 
       <Box my="l">
         <MaterialIcons name="money-off" size={100} />
       </Box>
       <Box width="100%">
+        {/* <DatePi */}
+        <Input
+          label="Data"
+          placeholder="Compra de carro"
+          // value={date}
+          onChangeText={setSource}
+        />
         <Input
           label="Motivo dos gastos"
           placeholder="Compra de carro"
+          value={source}
           onChangeText={setSource}
         />
         <Input
           label="Valor"
           placeholder="ex.: 5000000"
           keyboardType="numeric"
+          value={value}
           onChangeText={setValue}
         />
       </Box>
       <Button
         size="l"
-        mt="l"
-        mb="m"
-        label="Registar Gasto"
-        onPress={handleAddExpenditures}
-        disabled={!source?.length || !value?.length}
+        my="l"
+        label="Adicionar Gasto"
+        onPress={handleAddDailyExpenditures}
+        disabled={!source || !value}
       />
       <Button
         size="l"
-        mb="l"
-        label="Histórico de despesas"
-        onPress={seeExpenditures}
-      />
-      <Button
-        size="l"
-        mt="l"
-        label="Gastos Diários"
-        onPress={goToDailyExpenditures}
+        label="Ver Gastos Diários"
+        onPress={seeDailyExpenditures}
       />
     </ScreenContainer>
   );
