@@ -9,8 +9,8 @@ export function DailyExpendituresView() {
       <Text variant="subheader" mb="l" content="Lista de Gastos Diários" />
       {(dailyExpenditures?.length && (
         <Box mt="m" width="100%">
-          {dailyExpenditures.map(({day, value, id}) => (
-            <ListItem left={day} right={value} key={id} />
+          {dailyExpenditures.map(({date, value, id}) => (
+            <ListItem left={date.toDateString()} right={value} key={id} />
           ))}
         </Box>
       )) || (

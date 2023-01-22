@@ -19,20 +19,20 @@ export function RootNavigator() {
         },
       }}
     >
-      {/* {user ? ( */}
-      <>
-        <Stack.Screen name="Signed" component={SignedNavigator} />
-        <Stack.Group>
-          <Stack.Screen
-            name="Modal"
-            component={ModalScreen}
-            options={{presentation: 'modal'}}
-          />
-        </Stack.Group>
-      </>
-      {/* ) : (
+      {user ? (
+        <>
+          <Stack.Screen name="Signed" component={SignedNavigator} />
+          <Stack.Group>
+            <Stack.Screen
+              name="Modal"
+              component={ModalScreen}
+              options={{presentation: 'modal'}}
+            />
+          </Stack.Group>
+        </>
+      ) : (
         <Stack.Screen name="Auth" component={AuthNavigator} />
-      )} */}
+      )}
     </Stack.Navigator>
   );
 }

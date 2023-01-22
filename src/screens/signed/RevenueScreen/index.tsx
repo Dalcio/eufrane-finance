@@ -21,7 +21,7 @@ export function RevenueScreen({navigation}: SignedScreensProps<'Revenue'>) {
   };
 
   const handleAddRevenue = () => {
-    addRevenue({source, value: Number(value), date: new Date()}, resetForm);
+    addRevenue({source, value: Number(value)}, resetForm);
   };
 
   return (

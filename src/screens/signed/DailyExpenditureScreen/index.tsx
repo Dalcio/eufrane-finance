@@ -3,6 +3,7 @@ import {SignedScreensProps} from 'navigation/types';
 import useStore from 'store';
 import {useState} from 'react';
 import {MaterialIcons} from '@expo/vector-icons';
+// import DatePicker from 'react-native-date-picker';
 
 export function DailyExpenditureScreen({
   navigation,
@@ -33,13 +34,10 @@ export function DailyExpenditureScreen({
         <MaterialIcons name="money-off" size={100} />
       </Box>
       <Box width="100%">
-        {/* <DatePi */}
-        <Input
-          label="Data"
-          placeholder="Compra de carro"
-          // value={date}
-          onChangeText={setSource}
-        />
+        <Box minWidth="100%" mt="m">
+          <Text mb="m" textTransform="uppercase" content="data" />
+          {/* <DatePicker date={date} onDateChange={setDate} /> */}
+        </Box>
         <Input
           label="Motivo dos gastos"
           placeholder="Compra de carro"
