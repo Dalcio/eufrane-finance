@@ -1,5 +1,5 @@
 import {AntDesign} from '@expo/vector-icons';
-import {Box, Button, ListItem, ScreenContainer, Text} from 'components';
+import {Box, ListItem, ScreenContainer, Text} from 'components';
 import {TabContainer} from 'components/Tab';
 import {SignedScreensProps} from 'navigation/types';
 import useStore from 'store';

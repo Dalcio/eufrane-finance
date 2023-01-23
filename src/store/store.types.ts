@@ -19,7 +19,7 @@ export type TRevenue = {
 
 export type TDailyExpenditure = {
   id: string;
-  date: Date;
+  date?: Date;
   source: string;
   value: number;
 };

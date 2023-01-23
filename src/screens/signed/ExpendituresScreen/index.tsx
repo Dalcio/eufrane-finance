@@ -3,6 +3,8 @@ import {SignedScreensProps} from 'navigation/types';
 import useStore from 'store';
 import {useState} from 'react';
 import {MaterialIcons} from '@expo/vector-icons';
+import {ExpendituresView} from './ExpendituresView';
+import {DailyExpenditure} from './DailyExpenditure';
 
 export function ExpendituresScreen({
   navigation,
@@ -13,15 +15,15 @@ export function ExpendituresScreen({
   const addExpenditure = useStore((s) => s.addExpenditure);
 
   const seeExpenditures = () => {
-    navigation.navigate('Modal', {view: 'Expenditures'});
+    navigation.navigate('Modal', ExpendituresView);
   };
 
   const goToDailyExpenditures = () => {
-    navigation.navigate('DailyExpenditures');
+    navigation.navigate('Modal', DailyExpenditure);
   };
 
   const handleAddExpenditures = () => {
-    addExpenditure({source, value: Number(value), date: new Date()});
+    addExpenditure({source, value: Number(value)});
   };
 
   return (
@@ -65,7 +67,7 @@ export function ExpendituresScreen({
       <Button
         size="l"
         mt="l"
-        label="Gastos Diários"
+        label="Adicionar Gastos Diários"
         onPress={goToDailyExpenditures}
       />
     </ScreenContainer>

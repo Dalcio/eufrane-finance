@@ -1,25 +1,16 @@
 import {Box, Button, Input, ScreenContainer, Text} from 'components';
-import {SignedScreensProps} from 'navigation/types';
 import useStore from 'store';
 import {useState} from 'react';
 import {MaterialIcons} from '@expo/vector-icons';
-// import DatePicker from 'react-native-date-picker';
 
-export function DailyExpenditureScreen({
-  navigation,
-}: SignedScreensProps<'Expenditures'>) {
-  const [date, setDate] = useState<Date>(new Date());
+export function DailyExpenditure() {
   const [source, setSource] = useState<string>('');
   const [value, setValue] = useState<string>('');
 
   const addDailyExpenditure = useStore((s) => s.addDailyExpenditure);
 
-  const seeDailyExpenditures = () => {
-    navigation.navigate('Modal', {view: 'DailyExpenditures'});
-  };
-
   const handleAddDailyExpenditures = () => {
-    addDailyExpenditure({source, value: Number(value), date});
+    addDailyExpenditure({source, value: Number(value)});
   };
 
   return (
@@ -58,11 +49,6 @@ export function DailyExpenditureScreen({
         label="Adicionar Gasto"
         onPress={handleAddDailyExpenditures}
         disabled={!source || !value}
-      />
-      <Button
-        size="l"
-        label="Ver Gastos Diários"
-        onPress={seeDailyExpenditures}
       />
     </ScreenContainer>
   );

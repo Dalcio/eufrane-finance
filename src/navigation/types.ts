@@ -4,7 +4,7 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {ReactNode} from 'react';
+import {ReactElement, ReactNode} from 'react';
 
 declare global {
   namespace ReactNavigation {
@@ -15,7 +15,7 @@ declare global {
 export type RootStackParamList = {
   Auth: NavigatorScreenParams<AuthParamList> | undefined;
   Signed: NavigatorScreenParams<SignedParamList> | undefined;
-  Modal: {view: keyof SignedParamList};
+  Modal: (params?: any) => JSX.Element | ReactElement;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -35,7 +35,6 @@ export type SignedParamList = {
   Revenue: undefined;
   Expenditures: undefined;
   Budget: undefined;
-  DailyExpenditures: undefined;
 };
 
 export type SignedScreensProps<Screen extends keyof SignedParamList> =

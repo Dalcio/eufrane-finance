@@ -3,6 +3,7 @@ import {SignedScreensProps} from 'navigation/types';
 import useStore from 'store';
 import {useState} from 'react';
 import {MaterialIcons} from '@expo/vector-icons';
+import {RevenueListView} from './RevenueListView';
 
 export function RevenueScreen({navigation}: SignedScreensProps<'Revenue'>) {
   const [source, setSource] = useState<string>('');
@@ -17,7 +18,7 @@ export function RevenueScreen({navigation}: SignedScreensProps<'Revenue'>) {
   };
 
   const seeRevenue = () => {
-    navigation.navigate('Modal', {view: 'Revenue'});
+    navigation.navigate('Modal', RevenueListView);
   };
 
   const handleAddRevenue = () => {
