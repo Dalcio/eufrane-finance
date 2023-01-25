@@ -1,60 +1,83 @@
-import {AntDesign} from '@expo/vector-icons';
-import {Box, ListItem, ScreenContainer, Text} from 'components';
-import {TabContainer} from 'components/Tab';
+import {MaterialIcons} from '@expo/vector-icons';
+import {Box, Button, Input, ScreenContainer, Text} from 'components';
 import {SignedScreensProps} from 'navigation/types';
+import {useState} from 'react';
 import useStore from 'store';
+import {DailyExpenditure} from './DailyExpenditure';
+import {BudgetView} from './BudgetView';
+import {dailyExpendituresView} from './DailyExpendituresView';
 
-export function BudgetScreen({
-  navigation: {goBack},
-}: SignedScreensProps<'Budget'>) {
-  const {expenditures, revenues, budget, balance} = useStore();
+export function BudgetScreen({navigation}: SignedScreensProps<'Budget'>) {
+  const [source, setSource] = useState<string>('');
+  const [value, setValue] = useState<string>('');
+
+  const addOrnament = useStore((s) => s.addOrnament);
+
+  const seeBudget = () => {
+    navigation.navigate('Modal', BudgetView);
+  };
+
+  const seeDailyExpenditures = () => {
+    navigation.navigate('Modal', dailyExpendituresView);
+  };
+
+  const goToDailyExpenditures = () => {
+    navigation.navigate('Modal', DailyExpenditure);
+  };
+
+  const handleAddExpenditures = () => {
+    addOrnament({source, value: Number(value)});
+  };
 
   return (
-    <ScreenContainer>
+    <ScreenContainer alignItems="center">
       <Text
-        content="Orçamento Geral"
         variant="subheader"
         textTransform="uppercase"
-        textAlign="center"
+        content="Orçamento Mensal"
       />
 
-      <Box my="l" alignItems="center">
-        <AntDesign name="linechart" size={80} />
-      </Box>
-
-      <Box mb="l">
-        <ListItem left="SALDO ATUAL" right={balance} />
-      </Box>
-
-      {((revenues || expenditures) && (
-        <TabContainer
-          headers={['Receitas', 'Gastos']}
-          contents={[revenues ?? [], expenditures ?? []]}
-        />
-      )) || <></>}
-
       <Box my="l">
-        <Text
-          content="Poupança"
-          variant="subheader"
-          textTransform="uppercase"
-          textAlign="center"
-        />
-        <Box
-          borderBottomColor="black"
-          borderBottomWidth={1}
-          borderStyle="dashed"
-          pb="s"
-        >
-          <Text
-            variant="subheader"
-            textTransform="uppercase"
-            textAlign="center"
-          >
-            {budget}
-          </Text>
-        </Box>
+        <MaterialIcons name="money-off" size={100} />
       </Box>
+      <Box width="100%">
+        <Input
+          label="Nome do Orçamento"
+          placeholder="motivo do orçamento"
+          onChangeText={setSource}
+        />
+        <Input
+          label="Valor"
+          placeholder="ex.: 5000000"
+          keyboardType="numeric"
+          onChangeText={setValue}
+        />
+      </Box>
+      <Button
+        size="l"
+        mt="l"
+        label="Registar Orçamento"
+        onPress={handleAddExpenditures}
+        disabled={!source?.length || !value?.length}
+      />
+      <Button
+        size="l"
+        my="l"
+        label="Adicionar Gastos Diários"
+        onPress={goToDailyExpenditures}
+      />
+      <Button
+        size="l"
+        mt="l"
+        label="Histórico de orçamento"
+        onPress={seeBudget}
+      />
+      <Button
+        size="l"
+        mt="l"
+        label="Histórico de gastos diários"
+        onPress={seeDailyExpenditures}
+      />
     </ScreenContainer>
   );
 }

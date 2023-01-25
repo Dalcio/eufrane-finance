@@ -7,12 +7,14 @@ import storeActions from './store.actions';
 const storeState: StoreState = {
   theme: 'dark',
   user: undefined,
-  expenditures: undefined,
-  revenues: undefined,
+  expenditures: [],
+  revenues: [],
   isLoading: false,
-  dailyExpenditures: undefined,
+  dailyExpenditures: [],
   balance: 0,
   budget: 0,
+  ornament: [],
+  savings: [],
 };
 
 let store = combine<StoreState, StoreActions, any, any>(

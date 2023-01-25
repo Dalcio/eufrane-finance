@@ -4,6 +4,8 @@ import useStore from 'store';
 import {useState} from 'react';
 import {MaterialIcons} from '@expo/vector-icons';
 import {RevenueListView} from './RevenueListView';
+import {Savings} from './Savings';
+import {SavingListView} from './SavingView';
 
 export function RevenueScreen({navigation}: SignedScreensProps<'Revenue'>) {
   const [source, setSource] = useState<string>('');
@@ -22,16 +24,21 @@ export function RevenueScreen({navigation}: SignedScreensProps<'Revenue'>) {
   };
 
   const handleAddRevenue = () => {
-    addRevenue({source, value: Number(value)}, resetForm);
+    addRevenue({source, value: Number(value)});
+    resetForm();
+  };
+
+  const goToSavings = () => {
+    navigation.navigate('Modal', Savings);
+  };
+
+  const seeSavingsListView = () => {
+    navigation.navigate('Modal', SavingListView);
   };
 
   return (
     <ScreenContainer alignItems="center">
-      <Text
-        variant="subheader"
-        textTransform="uppercase"
-        content="Entradas (Receitas)"
-      />
+      <Text variant="subheader" textTransform="uppercase" content="Receitas" />
 
       <Box my="l">
         <MaterialIcons name="attach-money" size={100} />
@@ -40,24 +47,45 @@ export function RevenueScreen({navigation}: SignedScreensProps<'Revenue'>) {
         <Input
           label="Fonte da rececita"
           placeholder="Venda de carro"
+          value={source}
           onChangeText={setSource}
         />
         <Input
           label="Valor"
           placeholder="ex.: 5000000"
           keyboardType="numeric"
+          value={value}
           onChangeText={setValue}
         />
       </Box>
       <Button
         size="l"
-        my="l"
+        mt="l"
         label="Adicionar Receita"
         onPress={handleAddRevenue}
         disabled={!source?.length || !value?.length || isAddingRevenue}
         isLoading={isAddingRevenue}
       />
-      <Button size="l" label="Histórico de receitas" onPress={seeRevenue} />
+
+      <Button
+        size="l"
+        my="l"
+        label="Adicionar Poupança"
+        onPress={goToSavings}
+      />
+
+      <Button
+        mt="m"
+        size="l"
+        label="Histórico de receitas"
+        onPress={seeRevenue}
+      />
+      <Button
+        mt="m"
+        size="l"
+        label="Histórico de poupanças"
+        onPress={seeSavingsListView}
+      />
     </ScreenContainer>
   );
 }

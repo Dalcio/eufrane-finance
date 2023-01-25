@@ -1,10 +1,73 @@
-import {ScreenContainer, Text} from 'components';
-import {SignedScreensProps} from 'navigation/types';
+import {AntDesign} from '@expo/vector-icons';
+import {Box, ListItem, ScreenContainer, Text} from 'components';
+import {TabContainer} from 'components/Tab';
+import useStore from 'store';
 
-export function HomeScreen({navigation}: SignedScreensProps<'Home'>) {
+export function HomeScreen() {
+  const {
+    expenditures,
+    revenues,
+    budget,
+    balance,
+    ornament,
+    dailyExpenditures,
+    savings,
+  } = useStore();
+
   return (
     <ScreenContainer>
-      <Text>Home Screen</Text>
+      <Text
+        content="Resumo Geral"
+        variant="subheader"
+        textTransform="uppercase"
+        textAlign="center"
+        mb="l"
+        pb="l"
+      />
+
+      {((revenues.length || expenditures.length) && (
+        <TabContainer
+          headers={['Receitas', 'Gastos']}
+          contents={[revenues ?? [], expenditures ?? []]}
+        />
+      )) || <></>}
+
+      {((ornament.length || savings.length) && (
+        <TabContainer
+          headers={['Orçamento', 'Poupanças']}
+          contents={[ornament ?? [], savings ?? []]}
+        />
+      )) || <></>}
+
+      {(dailyExpenditures.length && (
+        <TabContainer
+          headers={['Gastos Diários']}
+          contents={[dailyExpenditures ?? []]}
+        />
+      )) || <></>}
+
+      <Box my="l">
+        <Text
+          content="Saldo Atual"
+          variant="subheader"
+          textTransform="uppercase"
+          textAlign="center"
+        />
+        <Box
+          borderBottomColor="black"
+          borderBottomWidth={1}
+          borderStyle="dashed"
+          pb="s"
+        >
+          <Text
+            variant="subheader"
+            textTransform="uppercase"
+            textAlign="center"
+          >
+            {budget}
+          </Text>
+        </Box>
+      </Box>
     </ScreenContainer>
   );
 }

@@ -1,17 +1,17 @@
 import {Box, ListItem, ListItemHeader, Text} from 'components';
 import useStore from 'store';
 
-export function RevenueListView() {
-  const revenues = useStore((s) => s.revenues);
-  const remove = useStore((s) => s.removeRevenue);
+export function SavingListView() {
+  const savings = useStore((s) => s.savings);
+  const remove = useStore((s) => s.removeSaving);
 
   return (
     <Box alignItems="center" flexGrow={1}>
-      <Text variant="subheader" mb="m" content="Lista de receitas" />
-      {(revenues?.length && (
+      <Text variant="subheader" mb="m" content="Lista de poupanças" />
+      {(savings?.length && (
         <Box mt="m" width="100%">
           <ListItemHeader left="Descrição" right="Valor" />
-          {revenues.map(({source, value, id}) => (
+          {savings.map(({source, value, id}) => (
             <ListItem
               left={source}
               right={value}
@@ -22,7 +22,7 @@ export function RevenueListView() {
         </Box>
       )) || (
         <Box alignItems="center" justifyContent="center" flexGrow={1}>
-          <Text content="Não existe nenhuma receita" />
+          <Text content="Não existe nenhuma poupança" />
         </Box>
       )}
     </Box>

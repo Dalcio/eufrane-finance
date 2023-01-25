@@ -4,7 +4,6 @@ import useStore from 'store';
 import {useState} from 'react';
 import {MaterialIcons} from '@expo/vector-icons';
 import {ExpendituresView} from './ExpendituresView';
-import {DailyExpenditure} from './DailyExpenditure';
 
 export function ExpendituresScreen({
   navigation,
@@ -18,21 +17,19 @@ export function ExpendituresScreen({
     navigation.navigate('Modal', ExpendituresView);
   };
 
-  const goToDailyExpenditures = () => {
-    navigation.navigate('Modal', DailyExpenditure);
+  const resetForm = () => {
+    setSource('');
+    setValue('');
   };
 
   const handleAddExpenditures = () => {
     addExpenditure({source, value: Number(value)});
+    resetForm();
   };
 
   return (
     <ScreenContainer alignItems="center">
-      <Text
-        variant="subheader"
-        textTransform="uppercase"
-        content="Saidas (Gastos)"
-      />
+      <Text variant="subheader" textTransform="uppercase" content="Gastos" />
 
       <Box my="l">
         <MaterialIcons name="money-off" size={100} />
@@ -63,12 +60,6 @@ export function ExpendituresScreen({
         mb="l"
         label="Histórico de despesas"
         onPress={seeExpenditures}
-      />
-      <Button
-        size="l"
-        mt="l"
-        label="Adicionar Gastos Diários"
-        onPress={goToDailyExpenditures}
       />
     </ScreenContainer>
   );

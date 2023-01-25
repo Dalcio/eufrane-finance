@@ -15,26 +15,26 @@ type RoutesType = {
 
 const ROUTES: RoutesType = {
   home: {
-    Icon: ({color}) => <FontAwesome name="home" size={30} color={color} />,
+    Icon: ({color}) => <FontAwesome name="home" size={24} color={color} />,
   },
   revenue: {
     Icon: ({color}: IconType) => (
-      <MaterialIcons name="attach-money" size={30} color={color} />
+      <MaterialIcons name="attach-money" size={24} color={color} />
     ),
   },
   expenditures: {
     Icon: ({color}: IconType) => (
-      <MaterialIcons name="money-off" size={30} color={color} />
+      <MaterialIcons name="money-off" size={24} color={color} />
     ),
   },
   dailyexpenditures: {
     Icon: ({color}: IconType) => (
-      <MaterialIcons name="money-off" size={30} color={color} />
+      <MaterialIcons name="money-off" size={24} color={color} />
     ),
   },
   budget: {
     Icon: ({color}: IconType) => (
-      <AntDesign name="linechart" size={30} color={color} />
+      <AntDesign name="linechart" size={24} color={color} />
     ),
   },
 };
@@ -49,8 +49,10 @@ export function TabBarMenu({
       flexDirection="row"
       justifyContent="center"
       bg="black"
-      p="s"
-      m="s"
+      // p="xs"
+      marginVertical="xs"
+      width="80%"
+      alignSelf="center"
       borderRadius="l"
     >
       {state.routes.map((route, index) => {
@@ -101,10 +103,11 @@ export function TabBarMenu({
               borderRadius="m"
               p="s"
               m="xs"
+              mt="s"
               bg={(isFocused && 'white') || 'black'}
             >
               {Icon && <Icon color={(isFocused && 'black') || 'white'} />}
-              {(isFocused && (
+              {(isFocused && label && (
                 <Text
                   ml="s"
                   color={isFocused ? 'black' : 'white'}

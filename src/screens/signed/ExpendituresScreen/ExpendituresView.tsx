@@ -3,6 +3,7 @@ import useStore from 'store';
 
 export function ExpendituresView() {
   const expenditures = useStore((s) => s.expenditures);
+  const remove = useStore((s) => s.removeExpenditure);
 
   return (
     <Box alignItems="center" flexGrow={1}>
@@ -11,7 +12,12 @@ export function ExpendituresView() {
         <Box mt="m" width="100%">
           <ListItemHeader left="Motivo" right="Valor" />
           {expenditures.map(({source, value, id}) => (
-            <ListItem left={source} right={value} key={id} />
+            <ListItem
+              left={source}
+              right={value}
+              key={id}
+              onRemove={() => remove({id})}
+            />
           ))}
         </Box>
       )) || (

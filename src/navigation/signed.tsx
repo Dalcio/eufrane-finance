@@ -1,6 +1,11 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SignedParamList} from './types';
-import {BudgetScreen, ExpendituresScreen, RevenueScreen} from 'screens/signed';
+import {
+  BudgetScreen,
+  ExpendituresScreen,
+  HomeScreen,
+  RevenueScreen,
+} from 'screens/signed';
 import {TabBarMenu} from './TabBarMenu';
 
 const BottomTab = createBottomTabNavigator<SignedParamList>();
@@ -12,6 +17,11 @@ export default function SignedNavigator() {
       screenOptions={{headerShown: false}}
       tabBar={(props) => <TabBarMenu {...props} />}
     >
+      <BottomTab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{title: ''}}
+      />
       <BottomTab.Screen
         name="Revenue"
         component={RevenueScreen}
@@ -25,7 +35,7 @@ export default function SignedNavigator() {
       <BottomTab.Screen
         name="Budget"
         component={BudgetScreen}
-        options={{title: 'Orçamento Geral'}}
+        options={{title: 'Orçamento'}}
       />
     </BottomTab.Navigator>
   );
