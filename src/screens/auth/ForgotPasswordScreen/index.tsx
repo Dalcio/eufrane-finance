@@ -24,7 +24,10 @@ export function ForgotPasswordScreen({
 
   return (
     <ScreenContainer alignItems="center" justifyContent="center">
-      <Text variant="header" content="Recuperar Senha" />
+      <Text
+        variant="header"
+        content={(steps === 0 && 'Recuperar Senha') || 'Nova Senha'}
+      />
       <ButtonLink onPress={goToSignInScreen} cation="Iniciar Sessão" />
       {(steps === 0 && (
         <Input
