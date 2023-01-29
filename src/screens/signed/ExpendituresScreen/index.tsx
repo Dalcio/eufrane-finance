@@ -12,6 +12,8 @@ export function ExpendituresScreen({
   const [value, setValue] = useState<string>('');
 
   const addExpenditure = useStore((s) => s.addExpenditure);
+  const expenditures = useStore((s) => s.expenditures);
+  const isAdding = useStore((s) => s.isLoading);
 
   const seeExpenditures = () => {
     navigation.navigate('Modal', ExpendituresView);
@@ -23,8 +25,7 @@ export function ExpendituresScreen({
   };
 
   const handleAddExpenditures = () => {
-    addExpenditure({source, value: Number(value)});
-    resetForm();
+    addExpenditure({source, value: Number(value)}, resetForm);
   };
 
   return (
@@ -32,7 +33,7 @@ export function ExpendituresScreen({
       <Text variant="subheader" textTransform="uppercase" content="Gastos" />
 
       <Box my="l">
-        <MaterialIcons name="money-off" size={100} />
+        <MaterialIcons name="money-off" size={50} />
       </Box>
       <Box width="100%">
         <Input
@@ -49,9 +50,11 @@ export function ExpendituresScreen({
       </Box>
       <Button
         size="l"
-        mt="l"
+        mt="m"
         mb="m"
         label="Registar Gasto"
+        isLoading={isAdding}
+        bgColor="submit"
         onPress={handleAddExpenditures}
         disabled={!source?.length || !value?.length}
       />
@@ -59,6 +62,7 @@ export function ExpendituresScreen({
         size="l"
         mb="l"
         label="Histórico de despesas"
+        disabled={!expenditures.length}
         onPress={seeExpenditures}
       />
     </ScreenContainer>

@@ -7,11 +7,13 @@ import Navigation from 'navigation';
 import theme from 'theme';
 import {ThemeProvider} from '@shopify/restyle';
 import {layout} from 'constants/Layout';
+import {usePopulateOnInit} from 'hooks/usePopulateOnInit';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const {width} = layout.window;
   const marginX = width <= 500 ? 0 : (width - 500) / 2;
+  // usePopulateOnInit();
 
   if (!isLoadingComplete) {
     return null;

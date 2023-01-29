@@ -2,7 +2,7 @@ import {Box, ListItem, ListItemHeader, Text} from 'components';
 import useStore from 'store';
 
 export function dailyExpendituresView() {
-  const dailyExpenditures = useStore((s) => s.dailyExpenditures);
+  const {dailyExpenditures} = useStore();
 
   const remove = useStore((s) => s.removeDailyExpenditure);
 

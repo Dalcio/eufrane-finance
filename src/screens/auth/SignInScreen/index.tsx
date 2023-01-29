@@ -28,7 +28,7 @@ export function SignInScreen({navigation}: AuthScreenProps<'SignIn'>) {
       <Text content="Inicie a sessão para continuares" mt="m" />
       <Input
         label="Email"
-        placeholder="ex.: alguem@exemplo.com"
+        placeholder="ex.: eufrane.neto@exemplo.com"
         keyboardType="email-address"
         textContentType="emailAddress"
         onChangeText={onChangeEmail}

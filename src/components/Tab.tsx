@@ -16,34 +16,54 @@ type TabContainerProps = {
 type TabHeaderProps = {
   currentTab: number;
   headers: string[];
+  contents: Content[][];
   toggleCurrentTab: (idx: number) => void;
 };
 
-const TabHeader = ({currentTab, toggleCurrentTab, headers}: TabHeaderProps) => (
+const TabHeader = ({
+  currentTab,
+  contents,
+  toggleCurrentTab,
+  headers,
+}: TabHeaderProps) => (
   <Box
     width="100%"
     flexDirection="row"
-    mb="s"
     borderBottomColor="black"
     borderBottomWidth={1}
     bg="lightGray"
     borderTopLeftRadius="m"
     borderTopRightRadius="m"
   >
-    {headers.map((header, idx) => (
-      <Pressable onPress={() => toggleCurrentTab(idx)} key={uuid()}>
+    {(contents[0].length && (
+      <Pressable onPress={() => toggleCurrentTab(0)} key={uuid()}>
         <Box width="100%" p="s">
           <Text
-            variant="subheader2"
-            fontWeight={currentTab === idx ? '600' : '100'}
+            variant="subheader3"
+            fontWeight={currentTab === 0 ? '600' : '100'}
             textAlign="left"
             textTransform="uppercase"
           >
-            {header}
+            {headers[0]}
           </Text>
         </Box>
       </Pressable>
-    ))}
+    )) || <Box />}
+
+    {(contents[1].length && (
+      <Pressable onPress={() => toggleCurrentTab(1)} key={uuid()}>
+        <Box width="100%" p="s">
+          <Text
+            variant="subheader2"
+            fontWeight={currentTab === 1 ? '600' : '100'}
+            textAlign="left"
+            textTransform="uppercase"
+          >
+            {headers[1]}
+          </Text>
+        </Box>
+      </Pressable>
+    )) || <Box />}
   </Box>
 );
 
@@ -70,24 +90,34 @@ const TabContent = ({source, value}: Content) => (
 );
 
 export const TabContainer = ({contents, headers}: TabContainerProps) => {
-  const [currentTab, setCurrentTab] = useState(0);
+  const [currentTab, setCurrentTab] = useState(contents[0].length ? 0 : 1);
 
   const toggleCurrentTab = (idx: number) => setCurrentTab(idx);
 
   return (
-    <ScrollView style={{maxHeight: 200}}>
-      <Box width="100%">
-        <TabHeader
-          headers={headers}
-          currentTab={currentTab}
-          toggleCurrentTab={toggleCurrentTab}
-        />
-        <Box width="100%" flexGrow={1}>
+    <Box width="100%" mb="l">
+      <TabHeader
+        headers={headers}
+        currentTab={currentTab}
+        contents={contents}
+        toggleCurrentTab={toggleCurrentTab}
+      />
+      <Box
+        width="100%"
+        flexGrow={1}
+        borderColor="black"
+        borderWidth={1}
+        borderTopWidth={0}
+        borderBottomLeftRadius="m"
+        borderBottomRightRadius="m"
+        p="s"
+      >
+        <ScrollView style={{maxHeight: 200}}>
           {contents[currentTab].map((content) => (
             <TabContent {...content} key={uuid()} />
           ))}
-        </Box>
+        </ScrollView>
       </Box>
-    </ScrollView>
+    </Box>
   );
 };

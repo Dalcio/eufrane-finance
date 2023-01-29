@@ -22,6 +22,7 @@ type Props = React.ComponentProps<typeof BaseButton> &
     label: string;
     isLoading?: boolean;
     size?: SizeProps;
+    bgColor?: ColorProps<Theme>['color'];
   };
 
 const SIZES: {[key in SizeProps]: string} = {
@@ -35,16 +36,13 @@ export const Button = ({
   isLoading,
   color = 'secondaryText',
   size,
+  bgColor = 'primaryText',
   ...props
 }: Props) => {
   const theme = useTheme<Theme>();
 
   // Will be 'purple' on phone and 'blue' on tablet
   const textColorProp = useResponsiveProp(color);
-
-  // Can safely perform logic with the extracted value
-  const bgColor =
-    textColorProp === 'primaryText' ? 'secondaryText' : 'primaryText';
 
   return (
     <BaseButton

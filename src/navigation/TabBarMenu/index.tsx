@@ -2,6 +2,7 @@ import {TouchableOpacity} from 'react-native';
 import {Box, Text} from 'components/Themed';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {AntDesign, FontAwesome, MaterialIcons} from '@expo/vector-icons';
+import {palette} from 'theme';
 
 type IconType = {
   color: string;
@@ -48,8 +49,7 @@ export function TabBarMenu({
     <Box
       flexDirection="row"
       justifyContent="center"
-      bg="black"
-      // p="xs"
+      bg="blue200"
       marginVertical="xs"
       width="80%"
       alignSelf="center"
@@ -104,13 +104,15 @@ export function TabBarMenu({
               p="s"
               m="xs"
               mt="s"
-              bg={(isFocused && 'white') || 'black'}
+              bg={(isFocused && 'white') || 'blue200'}
             >
-              {Icon && <Icon color={(isFocused && 'black') || 'white'} />}
+              {Icon && (
+                <Icon color={(isFocused && palette.blue200) || 'white'} />
+              )}
               {(isFocused && label && (
                 <Text
                   ml="s"
-                  color={isFocused ? 'black' : 'white'}
+                  color={isFocused ? 'blue200' : 'white'}
                   variant="buttonLabel"
                 >
                   {label}

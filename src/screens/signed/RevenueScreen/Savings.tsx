@@ -10,6 +10,7 @@ export function Savings() {
   const [belongsTo, setBelongsTo] = useState<string>('');
 
   const addSaving = useStore((s) => s.addSaving);
+  const isAdding = useStore((s) => s.isLoading);
   const revenues = useStore((s) => s.revenues);
 
   const resetForm = () => {
@@ -19,8 +20,7 @@ export function Savings() {
   };
 
   const handleAddSaving = () => {
-    addSaving({source, value: Number(value), belongsTo});
-    resetForm();
+    addSaving({source, value: Number(value), belongsTo}, resetForm);
   };
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export function Savings() {
     <ScreenContainer alignItems="center">
       <Text variant="subheader" textTransform="uppercase" content="Poupanças" />
       <Box my="l">
-        <MaterialIcons name="wallet-giftcard" size={100} />
+        <MaterialIcons name="wallet-giftcard" size={50} />
       </Box>
       <Box width="100%">
         <Box minWidth="100%" mt="m">
@@ -71,6 +71,8 @@ export function Savings() {
         size="l"
         my="l"
         label="Adicionar Poupança"
+        bgColor="submit"
+        isLoading={isAdding}
         onPress={handleAddSaving}
         disabled={!source || !value}
       />

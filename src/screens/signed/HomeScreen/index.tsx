@@ -46,15 +46,15 @@ export function HomeScreen() {
         />
       )) || <></>}
 
-      <Box my="l">
+      <Box>
         <Text
           content="Saldo Atual"
-          variant="subheader"
+          variant="subheader2"
           textTransform="uppercase"
           textAlign="center"
         />
         <Box
-          borderBottomColor="black"
+          borderBottomColor={budget < 0 ? 'error' : 'black'}
           borderBottomWidth={1}
           borderStyle="dashed"
           pb="s"
@@ -63,6 +63,7 @@ export function HomeScreen() {
             variant="subheader"
             textTransform="uppercase"
             textAlign="center"
+            color={budget < 0 ? 'error' : 'primaryText'}
           >
             {budget}
           </Text>

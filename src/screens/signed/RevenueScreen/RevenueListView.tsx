@@ -2,7 +2,7 @@ import {Box, ListItem, ListItemHeader, Text} from 'components';
 import useStore from 'store';
 
 export function RevenueListView() {
-  const revenues = useStore((s) => s.revenues);
+  const {revenues} = useStore();
   const remove = useStore((s) => s.removeRevenue);
 
   return (

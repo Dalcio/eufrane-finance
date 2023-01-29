@@ -2,7 +2,7 @@ import {Box, ListItem, ListItemHeader, Text} from 'components';
 import useStore from 'store';
 
 export function SavingListView() {
-  const savings = useStore((s) => s.savings);
+  const {savings} = useStore();
   const remove = useStore((s) => s.removeSaving);
 
   return (

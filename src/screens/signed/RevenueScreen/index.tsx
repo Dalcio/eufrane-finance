@@ -12,6 +12,8 @@ export function RevenueScreen({navigation}: SignedScreensProps<'Revenue'>) {
   const [value, setValue] = useState<string>('');
 
   const addRevenue = useStore((s) => s.addRevenue);
+  const revenues = useStore((s) => s.revenues);
+  const savings = useStore((s) => s.savings);
   const isAddingRevenue = useStore((s) => s.isLoading);
 
   const resetForm = () => {
@@ -39,9 +41,8 @@ export function RevenueScreen({navigation}: SignedScreensProps<'Revenue'>) {
   return (
     <ScreenContainer alignItems="center">
       <Text variant="subheader" textTransform="uppercase" content="Receitas" />
-
       <Box my="l">
-        <MaterialIcons name="attach-money" size={100} />
+        <MaterialIcons name="attach-money" size={50} />
       </Box>
       <Box width="100%">
         <Input
@@ -60,32 +61,43 @@ export function RevenueScreen({navigation}: SignedScreensProps<'Revenue'>) {
       </Box>
       <Button
         size="l"
-        mt="l"
+        mt="m"
         label="Adicionar Receita"
+        bgColor="submit"
         onPress={handleAddRevenue}
         disabled={!source?.length || !value?.length || isAddingRevenue}
         isLoading={isAddingRevenue}
       />
-
-      <Button
-        size="l"
-        my="l"
-        label="Adicionar Poupança"
-        onPress={goToSavings}
-      />
-
       <Button
         mt="m"
         size="l"
         label="Histórico de receitas"
         onPress={seeRevenue}
+        disabled={!revenues.length}
       />
-      <Button
+      <Box
+        p="m"
         mt="m"
-        size="l"
-        label="Histórico de poupanças"
-        onPress={seeSavingsListView}
-      />
+        borderRadius="m"
+        borderWidth={1}
+        borderColor="primaryText"
+        width="100%"
+      >
+        <Button
+          disabled={!revenues.length}
+          size="l"
+          label="Adicionar Poupança"
+          bgColor="submit"
+          onPress={goToSavings}
+        />
+        <Button
+          mt="m"
+          size="l"
+          label="Histórico de poupanças"
+          onPress={seeSavingsListView}
+          disabled={!savings.length}
+        />
+      </Box>
     </ScreenContainer>
   );
 }

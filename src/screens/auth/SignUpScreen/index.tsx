@@ -37,7 +37,7 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUp'>) {
       />
       <Input
         label="Email"
-        placeholder="ex.: alguem@exemplo.com"
+        placeholder="ex.: eufrane.neto@exemplo.com"
         keyboardType="email-address"
         textContentType="emailAddress"
         onChangeText={onChangeEmail}
@@ -51,7 +51,7 @@ export function SignUpScreen({navigation}: AuthScreenProps<'SignUp'>) {
       />
       <Button
         size="l"
-        mt="l"
+       mt="m"
         label="Criar Conta"
         onPress={onSubmit}
         isLoading={isLoading}

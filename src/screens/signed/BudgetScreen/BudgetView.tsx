@@ -2,17 +2,17 @@ import {Box, ListItem, ListItemHeader, Text} from 'components';
 import useStore from 'store';
 
 export function BudgetView() {
-  const ornaments = useStore((s) => s.ornament);
+  const {ornament} = useStore();
 
   const remove = useStore((s) => s.removeOrnament);
 
   return (
     <Box alignItems="center" flexGrow={1}>
       <Text variant="subheader" mb="m" content="Orçamentos Registados" />
-      {(ornaments?.length && (
+      {(ornament?.length && (
         <Box mt="m" width="100%">
           <ListItemHeader left="Motivo" right="Valor" />
-          {ornaments.map(({source, value, id}) => (
+          {ornament.map(({source, value, id}) => (
             <ListItem
               left={source}
               right={value}

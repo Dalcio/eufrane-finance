@@ -4,7 +4,8 @@ export const palette = {
   purple: '#5A31F4',
   blue: '#2200cc',
   blue100: '#432FBF',
-  blue200: '#5E4ECB',
+  blue200: '#5794ff',
+  // blue200: '#2123FE',
   white: '#FFF',
   black: '#111',
   darkGray: '#333',
@@ -27,6 +28,7 @@ const theme = createTheme({
     blue: palette.blue,
     blue100: palette.blue100,
     blue200: palette.blue200,
+    submit: palette.blue200,
 
     error: palette.red,
     lightGray: palette.lightGray,
@@ -56,6 +58,12 @@ const theme = createTheme({
       fontWeight: '600',
       fontSize: 20,
       lineHeight: 30,
+      color: 'primaryText',
+    },
+    subheader3: {
+      fontWeight: '600',
+      fontSize: 18,
+      lineHeight: 28,
       color: 'primaryText',
     },
     defaults: {

@@ -3,14 +3,14 @@ import {StateCreator} from 'zustand';
 export type StoreState = {
   theme: 'dark' | 'light';
   user: User | undefined;
-  expenditures: TExpenditure[];
-  dailyExpenditures: TDailyExpenditure[];
-  revenues: TRevenue[];
+  expenditures: TExpenditure[]; //done
+  dailyExpenditures: TDailyExpenditure[]; //
+  revenues: TRevenue[]; //done
   isLoading: boolean;
-  budget: number;
-  balance: number;
-  ornament: TOrnamentMensal[];
-  savings: TSaving[];
+  budget: number; //
+  balance: number; //
+  ornament: TOrnamentMensal[]; //ornament
+  savings: TSaving[]; //
 };
 
 export type General = {id: string; source: string; value: number};
@@ -53,6 +53,9 @@ export type StoreActions = {
   removeDailyExpenditure: RemoveFunc;
   removeRevenue: RemoveFunc;
   removeExpenditure: RemoveFunc;
+  populateStore: <T>(data: T, key: keyof StoreState) => void;
+  forgotPassword: (email: string, cb: Function) => void;
+  resetPassword: (params: SignInParams) => void;
 };
 
 export type Store = StoreState & StoreActions;

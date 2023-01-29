@@ -2,7 +2,7 @@ import {Box, ListItem, ListItemHeader, Text} from 'components';
 import useStore from 'store';
 
 export function ExpendituresView() {
-  const expenditures = useStore((s) => s.expenditures);
+  const {expenditures} = useStore();
   const remove = useStore((s) => s.removeExpenditure);
 
   return (

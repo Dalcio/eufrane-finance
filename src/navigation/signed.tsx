@@ -35,7 +35,7 @@ export default function SignedNavigator() {
       <BottomTab.Screen
         name="Budget"
         component={BudgetScreen}
-        options={{title: 'Orçamento'}}
+        options={{title: 'O.M'}}
       />
     </BottomTab.Navigator>
   );

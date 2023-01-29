@@ -9,11 +9,18 @@ export function DailyExpenditure() {
   const [value, setValue] = useState<string>('');
   const [belongsTo, setBelongsTo] = useState<string>('');
 
+  const resetForm = () => {
+    setValue('');
+    setSource('');
+    setBelongsTo('');
+  };
+
   const addDailyExpenditure = useStore((s) => s.addDailyExpenditure);
   const ornaments = useStore((s) => s.ornament);
+  const isAdding = useStore((s) => s.isLoading);
 
   const handleAddDailyExpenditures = () => {
-    addDailyExpenditure({source, value: Number(value), belongsTo});
+    addDailyExpenditure({source, value: Number(value), belongsTo}, resetForm);
   };
 
   useEffect(() => {
@@ -31,7 +38,7 @@ export function DailyExpenditure() {
       />
 
       <Box my="l">
-        <MaterialIcons name="money-off" size={100} />
+        <MaterialIcons name="money-off" size={50} />
       </Box>
       <Box width="100%">
         <Box minWidth="100%" mt="m">
@@ -69,6 +76,7 @@ export function DailyExpenditure() {
         size="l"
         my="l"
         label="Adicionar Gasto"
+        isLoading={isAdding}
         onPress={handleAddDailyExpenditures}
         disabled={!source || !value}
       />
