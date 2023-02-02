@@ -1,11 +1,12 @@
-import {signInWithEmailAndPassword} from 'firebase/auth';
+import {Alert} from 'react-native';
+import {UserCredential, signInWithEmailAndPassword} from 'firebase/auth';
 import {authHandler} from 'services/firebase.config';
 
 export const signInWithEmailPassword = async (
   email: string,
   password: string,
 ) =>
-  new Promise((resolve, reject) => {
+  new Promise<UserCredential['user']>((resolve, reject) => {
     signInWithEmailAndPassword(authHandler, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -13,9 +14,8 @@ export const signInWithEmailPassword = async (
         resolve(user);
       })
       .catch((error) => {
-        // const errorCode = error.code;
         const errorMessage = error.message;
-
+        Alert.alert(error);
         reject(errorMessage);
       });
   });

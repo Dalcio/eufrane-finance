@@ -1,4 +1,4 @@
-import {combine} from 'zustand/middleware';
+import {combine, persist} from 'zustand/middleware';
 import {StoreState, StoreActions, Store} from './store.types';
 
 import create from 'zustand';
@@ -22,7 +22,7 @@ let store = combine<StoreState, StoreActions, any, any>(
   storeActions,
 );
 
-// store = persist(store);
+store = persist(store);
 
 const useStore = create<Store>(store);
 

@@ -50,11 +50,13 @@ export function BudgetScreen({navigation}: SignedScreensProps<'Budget'>) {
       </Box>
       <Box width="100%">
         <Input
+          value={source}
           label="Nome do Orçamento"
           placeholder="motivo do orçamento"
           onChangeText={setSource}
         />
         <Input
+          value={value}
           label="Valor"
           placeholder="ex.: 5000000"
           keyboardType="numeric"

@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {getData} from '../services/firebase.config';
+import {getData} from 'services/firebase.config';
 import useStore from 'store';
 import {
   Store,

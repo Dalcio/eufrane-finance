@@ -39,12 +39,14 @@ export function ExpendituresScreen({
         <Input
           label="Motivo dos gastos"
           placeholder="Compra de carro"
+          value={source}
           onChangeText={setSource}
         />
         <Input
           label="Valor"
           placeholder="ex.: 5000000"
           keyboardType="numeric"
+          value={value}
           onChangeText={setValue}
         />
       </Box>

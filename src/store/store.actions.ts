@@ -1,33 +1,48 @@
 import {Alert} from 'react-native';
 import {TheStore} from './store.types';
 import {v4 as uuid} from 'uuid';
-import {db} from '../services/firebase.config';
-import {addDoc, collection} from 'firebase/firestore';
+import {authHandler, db} from 'services/firebase.config';
+import {signInWithEmailPassword} from 'api/sign-in-with-email';
+import {signUpWithEmailPassword} from 'api/sign-up-with-email';
+import {addDoc, collection, deleteDoc, doc, setDoc} from 'firebase/firestore';
 
 const storeActions: TheStore = (set, get) => ({
   toggleTheme: () => {
     set((state) => ({theme: state.theme === 'dark' ? 'light' : 'dark'}));
   },
-  signIn(data) {
+  async signIn({email, password}) {
     set({isLoading: true});
-    set(() => ({
-      user: {
-        email: data.email,
-        name: data.email,
-        userToken: uuid(),
-      },
-    }));
+    try {
+      const {displayName} = await signInWithEmailPassword(email, password);
+      const userToken = await authHandler?.currentUser?.getIdToken();
+
+      set(() => ({
+        isLoading: false,
+        user: {
+          email,
+          name: displayName ?? '',
+          userToken: userToken ?? '',
+        },
+      }));
+    } catch (error: any) {}
     set({isLoading: false});
   },
-  signUp(data) {
+  async signUp({email, password}) {
     set({isLoading: true});
-    set(() => ({
-      user: {
-        email: data.email,
-        name: data.name,
-        userToken: uuid(),
-      },
-    }));
+    try {
+      const {displayName} = await signUpWithEmailPassword(email, password);
+
+      const userToken = await authHandler?.currentUser?.getIdToken();
+
+      set(() => ({
+        isLoading: false,
+        user: {
+          email,
+          name: displayName ?? '',
+          userToken: userToken ?? '',
+        },
+      }));
+    } catch (error: any) {}
     set({isLoading: false});
   },
   forgotPassword(email, cb) {
@@ -39,11 +54,16 @@ const storeActions: TheStore = (set, get) => ({
   async addExpenditure(props, cb) {
     set({isLoading: true});
     const expenditures = get().expenditures;
+    const userId = get().user?.email ?? '';
+    const docRef = await addDoc(
+      collection(db, 'data', userId, 'expenditures'),
+      props,
+    );
 
     set((draft) => ({
       expenditures: [
         ...expenditures,
-        {...props, daily: props.value, id: uuid()},
+        {...props, daily: props.value, id: docRef.id},
       ],
       budget: draft.budget - props.value,
     }));
@@ -53,9 +73,14 @@ const storeActions: TheStore = (set, get) => ({
   async addRevenue(props, cb) {
     set({isLoading: true});
     const revenues = get().revenues;
+    const userId = get().user?.email ?? '';
+    const docRef = await addDoc(
+      collection(db, 'data', userId, 'revenues'),
+      props,
+    );
 
     set((draft) => ({
-      revenues: [...revenues, {...props, savings: props.value, id: uuid()}],
+      revenues: [...revenues, {...props, savings: props.value, id: docRef.id}],
       budget: draft.budget + props.value,
     }));
     cb?.();
@@ -64,14 +89,23 @@ const storeActions: TheStore = (set, get) => ({
   async addDailyExpenditure(props, cb) {
     set({isLoading: true});
     let ornament = get().ornament;
+    const userId = get().user?.email ?? '';
     const draftIdx = ornament?.findIndex((e) => e.id === props.belongsTo);
     const value = ornament[draftIdx]?.daily ?? 0;
+
+    const docRef = await addDoc(
+      collection(db, 'data', userId, 'dailyExpenditures'),
+      props,
+    );
 
     if (value - props.value >= 0) {
       ornament[draftIdx].daily = value - props.value;
 
       set((draft) => ({
-        dailyExpenditures: [...draft.dailyExpenditures, {...props, id: uuid()}],
+        dailyExpenditures: [
+          ...draft.dailyExpenditures,
+          {...props, id: docRef.id},
+        ],
         expenditures: [...ornament],
       }));
       cb?.();
@@ -85,29 +119,40 @@ const storeActions: TheStore = (set, get) => ({
   async addOrnament(data, cb) {
     set({isLoading: true});
     const ornament = get().ornament;
-    const userId = get().user?.email ?? 'e';
-    // const docRef = await addDoc(collection(db, userId, ['ornaments']), data);
-    // save the bidget
+    const userId = get().user?.email ?? '';
 
-    set((d) => ({
-      ornament: [...ornament, {...data, daily: data.value, id: uuid()}],
-      budget: d.budget - data.value,
-      // ornament: [...ornament, {...data, daily: data.value, id: docRef.id}],
-    }));
-    cb?.();
-    set({isLoading: false});
+    try {
+      const docRef = await addDoc(
+        collection(db, 'data', userId, 'ornaments'),
+        data,
+      );
+
+      set((d) => ({
+        isLoading: false,
+        budget: d.budget - data.value,
+        ornament: [...ornament, {...data, daily: data.value, id: docRef.id}],
+      }));
+      cb?.();
+    } catch (error) {
+      set({isLoading: false});
+    }
   },
   async addSaving(props, cb) {
     set({isLoading: true});
     let revenues = get().revenues;
     const draftIdx = revenues?.findIndex((e) => e.id === props.belongsTo);
     const value = revenues[draftIdx]?.savings ?? 0;
+    const userId = get().user?.email ?? '';
+    const docRef = await addDoc(
+      collection(db, 'data', userId, 'savings'),
+      props,
+    );
 
     if (value - props.value >= 0) {
       revenues[draftIdx].savings = value - props.value;
 
       set((d) => ({
-        savings: [...d.savings, {...props, id: uuid()}],
+        savings: [...d.savings, {...props, id: docRef.id}],
         revenues: [...revenues],
         budget: d.budget - props.value,
       }));
@@ -118,7 +163,7 @@ const storeActions: TheStore = (set, get) => ({
     }
     set({isLoading: false});
   },
-  removeDailyExpenditure(props) {
+  async removeDailyExpenditure(props) {
     const dailyExpenditures = get().dailyExpenditures;
     const idx = dailyExpenditures.findIndex((o) => o.id === props.id);
     const [removed] = dailyExpenditures.splice(idx, 1);
@@ -127,10 +172,12 @@ const storeActions: TheStore = (set, get) => ({
         ? {...exp, daily: (exp.daily ?? 0) + removed.value}
         : exp,
     );
+    const userId = get().user?.email ?? '';
+    await deleteDoc(doc(db, 'data', userId, 'dailyExpenditures', props.id));
 
     set({dailyExpenditures, ornament});
   },
-  removeSaving(props) {
+  async removeSaving(props) {
     const savings = get().savings;
     const idx = savings.findIndex((o) => o.id === props.id);
     const [removed] = savings.splice(idx, 1);
@@ -172,10 +219,13 @@ const storeActions: TheStore = (set, get) => ({
       budget: d.budget + removed.value,
     }));
   },
-  removeExpenditure(props) {
+  async removeExpenditure(props) {
     const expenditures = get().expenditures;
     const idx = expenditures.findIndex((o) => o.id === props.id);
     const [removed] = expenditures.splice(idx, 1);
+
+    const userId = get().user?.email ?? '';
+    await deleteDoc(doc(db, 'data', userId, 'expenditures', props.id));
 
     set((d) => ({
       expenditures,
