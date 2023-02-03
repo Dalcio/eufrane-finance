@@ -12,15 +12,16 @@ import {
 
 export const usePopulateOnInit = async () => {
   const populateStore = useStore().populateStore;
+  const email = useStore((s) => s.user?.email ?? '');
 
   useEffect(() => {
     const populate = async () => {
-      const revenuesRef = await getData('revenues');
-      const ornamentRef = await getData('ornaments');
-      const expendituresRef = await getData('expenditures');
-      const dailyExpendituresRef = await getData('dailyExpenditure');
-      const savingsRef = await getData('savings');
-      const globalRef = await getData('global');
+      const revenuesRef = await getData(email, 'revenues');
+      const ornamentRef = await getData(email, 'ornaments');
+      const expendituresRef = await getData(email, 'expenditures');
+      const dailyExpendituresRef = await getData(email, 'dailyExpenditure');
+      const savingsRef = await getData(email, 'savings');
+      const globalRef = await getData(email, 'global');
 
       const revenues: TRevenue[] = [];
       revenuesRef.forEach((snapshot) => {

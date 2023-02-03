@@ -13,7 +13,7 @@ export default function App() {
   const isLoadingComplete = useCachedResources();
   const {width} = layout.window;
   const marginX = width <= 500 ? 0 : (width - 500) / 2;
-  // usePopulateOnInit();
+  usePopulateOnInit();
 
   if (!isLoadingComplete) {
     return null;

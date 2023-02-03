@@ -22,7 +22,7 @@ let store = combine<StoreState, StoreActions, any, any>(
   storeActions,
 );
 
-store = persist(store);
+// store = persist(store);
 
 const useStore = create<Store>(store);
 

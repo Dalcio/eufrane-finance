@@ -17,8 +17,8 @@ const app = initializeApp(firebaseConfig);
 const authHandler = getAuth(app);
 const db = getFirestore(app);
 
-const getData = async (path: string) => {
-  const docSnap = await getDocs(collection(db, path));
+const getData = async (email: string, path: string) => {
+  const docSnap = await getDocs(collection(db, 'data', email, path));
 
   return docSnap;
 };
